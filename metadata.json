@@ -1,0 +1,6 @@
+{
+  "name": "TiffinTrack - Aspirant Meal & Mess Manager",
+  "description": "Smart daily tiffin and mess tracker for competitive exam aspirants. Track meal deliveries, customize schedules, automate billing, log reviews, generate PDF records, and sync with Google Calendar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

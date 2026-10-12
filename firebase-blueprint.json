@@ -1,0 +1,120 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Aspirant user profile with mess settings and preferences",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "examTarget": { "type": "string" },
+        "messName": { "type": "string" },
+        "messPhone": { "type": "string" },
+        "costPerTiffin": { "type": "number" },
+        "dietType": { "type": "string" },
+        "spiceLevel": { "type": "string" },
+        "specialInstructions": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "email"]
+    },
+    "MealRecord": {
+      "title": "MealRecord",
+      "description": "Daily tiffin attendance and delivery record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "dayName": { "type": "string" },
+        "lunchReceived": { "type": "boolean" },
+        "lunchStatus": { "type": "string" },
+        "dinnerReceived": { "type": "boolean" },
+        "dinnerStatus": { "type": "string" },
+        "totalReceived": { "type": "number" },
+        "dailyCost": { "type": "number" },
+        "notes": { "type": "string" },
+        "rating": { "type": "number" },
+        "feedback": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "date", "dayName", "lunchReceived", "dinnerReceived", "totalReceived", "dailyCost"]
+    },
+    "Schedule": {
+      "title": "Schedule",
+      "description": "Weekly recurring tiffin schedule rule",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "dayOfWeek": { "type": "string" },
+        "lunchEnabled": { "type": "boolean" },
+        "lunchTime": { "type": "string" },
+        "dinnerEnabled": { "type": "boolean" },
+        "dinnerTime": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "dayOfWeek", "lunchEnabled", "dinnerEnabled"]
+    },
+    "Feedback": {
+      "title": "Feedback",
+      "description": "Feedback and meal quality complaint log",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "mealType": { "type": "string" },
+        "rating": { "type": "number" },
+        "category": { "type": "string" },
+        "comment": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "date", "mealType", "rating", "category", "comment"]
+    },
+    "BillingRecord": {
+      "title": "BillingRecord",
+      "description": "Automated weekly/monthly billing calculation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "periodStart": { "type": "string" },
+        "periodEnd": { "type": "string" },
+        "scheduledTiffins": { "type": "number" },
+        "missedTiffins": { "type": "number" },
+        "receivedTiffins": { "type": "number" },
+        "costPerTiffin": { "type": "number" },
+        "totalCost": { "type": "number" },
+        "daysCovered": { "type": "number" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "periodStart", "periodEnd", "scheduledTiffins", "receivedTiffins", "totalCost"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Aspirant user profile"
+    },
+    "/meals/{mealId}": {
+      "schema": { "$ref": "#/entities/MealRecord" },
+      "description": "Daily meal delivery entries"
+    },
+    "/schedules/{scheduleId}": {
+      "schema": { "$ref": "#/entities/Schedule" },
+      "description": "User custom weekly schedules"
+    },
+    "/feedbacks/{feedbackId}": {
+      "schema": { "$ref": "#/entities/Feedback" },
+      "description": "Meal feedback and reviews"
+    },
+    "/billing/{billingId}": {
+      "schema": { "$ref": "#/entities/BillingRecord" },
+      "description": "Generated billing summaries"
+    }
+  }
+}
